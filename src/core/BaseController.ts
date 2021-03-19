@@ -13,6 +13,7 @@ export abstract class BaseController {
 		}
 	}
 
+
 	public static jsonResponse (res: Response, code: number, message: string) {
 		return res.status(code).json({ message })
 	}

@@ -16,6 +16,6 @@ router.get('/health', function(req, res) {
 
 
 router.post('/', (request, response) => createUserController.execute(request, response))
-
+router.post('/teste', (request, response) => createUserController.executeAnotherFunction(request, response))
 
 export {router}

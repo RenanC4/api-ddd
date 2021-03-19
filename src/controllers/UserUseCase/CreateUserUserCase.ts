@@ -11,15 +11,16 @@ export class CreateUserUseCase implements BaseUseCase<CreateUserDTO, Promise<Res
 	}
 
 	async execute(req: CreateUserDTO) : Promise <Response> {
-		const {name, age} = req
+		const {name, age, profession} = req
 
 		try {
 				const response = await this.userRepo.getUser(name, age)
-				console.log(response)
+				console.log('db response', response)
+				return 
 		} catch (error) {	
 				return error
 		}
-		return 
+		 
 	}
 
 }
