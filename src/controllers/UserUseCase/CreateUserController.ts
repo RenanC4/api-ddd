@@ -19,9 +19,9 @@ export class CreateUserController extends BaseController{
 			if (!userInformation.name) {
 				return this.fail(res, 'no name informed')
 			}
-			const result = await this.userUseCase.execute(userInformation)
+			 await this.userUseCase.execute(userInformation)
 
-			return result
+			this.created(res)
 			
 		} catch (error) {
 			return this.fail(res, error.toString())
