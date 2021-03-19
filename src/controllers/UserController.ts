@@ -1,14 +1,17 @@
 import {Request, Response} from 'express'
-import { BaseController } from '../../core/BaseController';
-import { CreateUserDTO } from './CreateUserDTO';
-import { CreateUserUseCase } from './CreateUserUserCase';
+import { BaseController } from '../core/BaseController';
+import { CreateUserDTO } from './UserUseCase/CreateUserDTO';
+import { CreateUserUseCase } from './UserUseCase/CreateUserUserCase';
+import { UpdateUserUseCase } from './UpdateUserUseCase/UpdateUserUserCase';
 
-export class CreateUserController extends BaseController{
+export class UserController extends BaseController{
 	private userUseCase: CreateUserUseCase
+	private updateUserUseCase: UpdateUserUseCase
 
-	constructor(userUseCase: CreateUserUseCase) {
+	constructor(userUseCase: CreateUserUseCase, updateUserUseCase: UpdateUserUseCase) {
 		super()
 		this.userUseCase = userUseCase;
+		this.updateUserUseCase = updateUserUseCase;
 	}
 
 	protected async executeImpl(req: Request, res: Response) : Promise<void | any>{
@@ -37,6 +40,9 @@ export class CreateUserController extends BaseController{
 			if (!userInformation.profession) {
 				return this.fail(res, 'no profession informed')
 			}
+
+			await this.updateUserUseCase.execute(userInformation)
+
 			console.log('another function')
 
 			this.created(res)
